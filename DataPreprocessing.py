@@ -29,7 +29,7 @@ data['Description'] = data['Description'].str.replace('[^\w\s]', '')
 
 with open('data/preprocessing.csv', 'w', encoding='utf-8') as csv_file:
     writer = csv.writer(csv_file)
-    writer.writerow(['Topic', 'Title','Description'])
+    writer.writerow(['Topic', 'Content'])
 
 #xét từng dòng
 for i in data.index:
@@ -44,13 +44,13 @@ for i in data.index:
             data_token_topic.remove(word)
     #bỏ stopword cho title
     for word in data_token_title:
-            if word in stop_list:
-                data_token_title.remove(word)
+        if word in stop_list:
+            data_token_title.remove(word)
     #bỏ stopword cho description
     for word in data_token_des:
-            if word in stop_list:
-                data_token_des.remove(word)
+        if word in stop_list:
+            data_token_des.remove(word)
 
     with open('data/preprocessing.csv', 'a', encoding='utf-8') as csv_file:
         writer = csv.writer(csv_file)
-        writer.writerow([data_token_topic, data_token_title, data_token_des])
+        writer.writerow([data_token_topic, data_token_title + data_token_des])
